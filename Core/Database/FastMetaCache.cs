@@ -242,11 +242,11 @@ namespace MSBATranslator.Core.Database
 
         private static bool IsTargetTextField(string propName)
         {
-            return propName.Equals("En", StringComparison.OrdinalIgnoreCase)
-                || propName.Equals("TextEn", StringComparison.OrdinalIgnoreCase)
-                || propName.Equals("LocalizeEN", StringComparison.OrdinalIgnoreCase)
-                || propName.Equals("MessageEN", StringComparison.OrdinalIgnoreCase)
-                || propName.Equals("NameEn", StringComparison.OrdinalIgnoreCase);
+            return propName.EndsWith("En", StringComparison.OrdinalIgnoreCase)
+                || propName.EndsWith("EN", StringComparison.OrdinalIgnoreCase)
+                || propName.Equals("Description", StringComparison.OrdinalIgnoreCase)
+                || propName.Equals("Name", StringComparison.OrdinalIgnoreCase)
+                || propName.Equals("Title", StringComparison.OrdinalIgnoreCase);
         }
 
         public static VectorOffset BuildVectorFromInstanceFast(FlatBufferBuilder fbb, object instance, Func<object, int, object?> itemGetter, int len)

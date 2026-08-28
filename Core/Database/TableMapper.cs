@@ -176,12 +176,48 @@ namespace MSBATranslator.Core.Database
                 }
             }
 
-            if (baseName.StartsWith("Localize", StringComparison.OrdinalIgnoreCase) &&
-                !baseName.Equals("LocalizeGachaShop", StringComparison.OrdinalIgnoreCase) &&
-                !baseName.Equals("LocalizeCharProfile", StringComparison.OrdinalIgnoreCase))
+            if (baseName.Equals("LocalizeGachaShop", StringComparison.OrdinalIgnoreCase))
             {
-                var pKey = classType.GetProperty("Key");
-                if (pKey != null) return (inst, _, _) => pKey.GetValue(inst)?.ToString() ?? "";
+                var pShop = classType.GetProperty("GachaShopId") ?? classType.GetProperty("ShopId");
+                if (pShop != null)
+                {
+                    return (inst, _, _) => pShop.GetValue(inst)?.ToString() ?? "";
+                }
+            }
+
+            if (baseName.Equals("LocalizeCharProfile", StringComparison.OrdinalIgnoreCase))
+            {
+                var pChar = classType.GetProperty("CharacterId");
+                if (pChar != null)
+                {
+                    return (inst, _, _) => pChar.GetValue(inst)?.ToString() ?? "";
+                }
+            }
+
+            if (baseName.Equals("ScenarioCharacterName", StringComparison.OrdinalIgnoreCase))
+            {
+                var pName = classType.GetProperty("CharacterName");
+                if (pName != null)
+                {
+                    return (inst, _, _) => pName.GetValue(inst)?.ToString() ?? "";
+                }
+            }
+
+            if (baseName.Equals("CharacterDialogBattlePass", StringComparison.OrdinalIgnoreCase))
+            {
+                var pBp = classType.GetProperty("BattlePassID");
+                var pCostume = classType.GetProperty("CostumeUniqueId");
+                var pGid = classType.GetProperty("GroupId");
+                var pOrder = classType.GetProperty("DisplayOrder");
+
+                return (inst, _, _) =>
+                {
+                    long bpId = pBp != null ? Convert.ToInt64(pBp.GetValue(inst)) : 0;
+                    long cId = pCostume != null ? Convert.ToInt64(pCostume.GetValue(inst)) : 0;
+                    long gId = pGid != null ? Convert.ToInt64(pGid.GetValue(inst)) : 0;
+                    long dOrder = pOrder != null ? Convert.ToInt64(pOrder.GetValue(inst)) : 0;
+                    return $"{bpId}_{cId}_{gId}_{dOrder}";
+                };
             }
 
             if (baseName.Contains("Subtitle", StringComparison.OrdinalIgnoreCase))
@@ -256,10 +292,16 @@ namespace MSBATranslator.Core.Database
                 }
             }
 
-            var defKey = classType.GetProperty("Key") ?? classType.GetProperties().FirstOrDefault();
-            if (defKey != null)
+            var pKey = classType.GetProperty("Key");
+            if (pKey != null)
             {
-                return (inst, _, _) => defKey.GetValue(inst)?.ToString() ?? "";
+                return (inst, _, _) => pKey.GetValue(inst)?.ToString() ?? "";
+            }
+
+            var pIdFallback = classType.GetProperty("Id") ?? classType.GetProperty("ID");
+            if (pIdFallback != null)
+            {
+                return (inst, _, _) => pIdFallback.GetValue(inst)?.ToString() ?? "";
             }
 
             return (inst, _, _) => "";
