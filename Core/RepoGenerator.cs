@@ -29,7 +29,7 @@ namespace MSBATranslator.Core
             new() { FileName = "LocalizeSkill.json", TextFields = ["NameEn", "DescriptionEn"] },
             new() { FileName = "LocalizeEtc.json", TextFields = ["NameEn", "DescriptionEn"] },
             new() { FileName = "LocalizeGachaShop.json", TextFields = ["TabNameEn", "TitleNameEn", "SubTitleEn", "GachaDescriptionEn"] },
-            new() {  FileName = "LocalizeCharProfile.json",  TextFields = ["StatusMessageEn", "FullNameEn", "FamilyNameEn", "FamilyNameRubyEn", "PersonalNameEn", "PersonalNameRubyEn", "ClubNameForGachaEn", "SchoolYearEn", "CharacterAgeEn", "BirthdayEn", "CharHeightEn", "HobbyEn",  "WeaponNameEn", "WeaponDescEn", "ProfileIntroductionEn", "CharacterSSRNewEn"] },
+            new() { FileName = "LocalizeCharProfile.json",  TextFields = ["StatusMessageEn", "FullNameEn", "FamilyNameEn", "FamilyNameRubyEn", "PersonalNameEn", "PersonalNameRubyEn", "ClubNameForGachaEn", "SchoolYearEn", "CharacterAgeEn", "BirthdayEn", "CharHeightEn", "HobbyEn",  "WeaponNameEn", "WeaponDescEn", "ProfileIntroductionEn", "CharacterSSRNewEn"] },
             new() { FileName = "ScenarioCharacterName.json", TextFields = ["NameEN", "NicknameEN"] },
             new() { FileName = "CharacterVoiceSubtitle.json", TextFields = ["LocalizeEN"] },
             new() { FileName = "CharacterDialogSubtitle.json", TextFields = ["LocalizeEN"] },
